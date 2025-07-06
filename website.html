@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ramya V | Web Developer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #121212;
+      --surface: #1e1e1e;
+      --surface-alt: #2a2a2a;
+      --primary: #7f5af0;
+      --primary-alt: #6c4bd2;
+      --text: #e0e0e0;
+      --text-muted: #a0a0a0;
+      --border: #333;
+    }
+    
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      scroll-behavior: smooth; 
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    header {
+      background: rgba(30, 30, 30, 0.95);
+      padding: 1.5rem 5%;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    nav ul { 
+      list-style: none; 
+      display: flex; 
+      gap: 2rem; 
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      opacity: 0.9;
+    }
+    
+    nav a:hover { 
+      color: var(--primary);
+      opacity: 1;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    section {
+      padding: 100px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 3rem;
+      min-height: 90vh;
+    }
+    
+    .hero-content {
+      flex: 1;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    
+    .hero h1 span {
+      color: var(--primary);
+      background: linear-gradient(90deg, var(--primary), #a162e8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+    
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .hero-image img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+      animation: float 6s ease-in-out infinite;
+      filter: brightness(0.9) contrast(1.1);
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      color: var(--text);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 4px;
+      bottom: -10px;
+      left: 0;
+      background: linear-gradient(90deg, var(--primary), var(--primary-alt));
+      border-radius: 2px;
+    }
+    
+    .about-content {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+    
+    .about-text {
+      flex: 1;
+    }
+    
+    .about-text p {
+      margin-bottom: 1.5rem;
+      color: var(--text-muted);
+    }
+    
+    .about-image {
+      flex: 1;
+    }
+    
+    .about-image img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      filter: brightness(0.9);
+    }
+    
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .skill-card {
+      background: var(--surface);
+      padding: 2rem 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+      border-color: var(--primary);
+    }
+    
+    .skill-card i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .skill-card h3 {
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .project-card {
+      background: var(--surface);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+      border-color: var(--primary);
+    }
+    
+    .project-image {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      filter: brightness(0.9);
+    }
+    
+    .project-card:hover .project-image img {
+      transform: scale(1.05);
+      filter: brightness(1);
+    }
+    
+    .project-info {
+      padding: 1.5rem;
+    }
+    
+    .project-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    
+    .project-info p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .tag {
+      background: var(--surface-alt);
+      color: var(--text);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn:hover {
+      background: var(--primary-alt);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+    
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    footer {
+      background: var(--surface);
+      color: var(--text-muted);
+      padding: 3rem 5%;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .social-links a {
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    /* Education Section */
+    .education-item {
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .education-item h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .education-item .date {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    
+    /* Internship Section */
+    .experience-item {
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .experience-item h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .experience-item .company {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    
+    .experience-item .date {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    
+    .experience-item ul {
+      padding-left: 1.5rem;
+    }
+    
+    .experience-item li {
+      margin-bottom: 0.5rem;
+      color: var(--text-muted);
+    }
+    
+    /* Resume Section */
+    .resume-section {
+      text-align: center;
+      padding: 4rem 0;
+    }
+    
+    .resume-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .resume-btn:hover {
+      background: var(--primary-alt);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px -5px rgba(127, 90, 240, 0.3);
+    }
+    
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 1rem;
+      }
+      
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 80px;
+      }
+      
+      .hero-content {
+        order: 2;
+      }
+      
+      .hero-image {
+        order: 1;
+        margin-bottom: 2rem;
+      }
+      
+      .about-content {
+        flex-direction: column;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+    }
+    
+    /* Animation classes */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="#" class="logo">Ramya.V</a>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#resume">Resume</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 class="reveal">Hi, I'm <span>Ramya V</span></h1>
+      <p class="reveal delay-1">Web Developer | B.Sc Computer Science Student | AI Enthusiast</p>
+      <p class="reveal delay-1">From Chennai, India</p>
+      <div class="reveal delay-2" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="#projects" class="btn">View My Work</a>
+        <a href="#V.Ramya resume" class="btn btn-outline">
+          <i class="fas fa-download"></i> Download Resume
+        </a>
+      </div>
+    </div>
+    <div class="hero-image reveal delay-1">
+      <img src="https://images.unsplash.com/photo-1579403124614-197f69d8187b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="Ramya V">
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title reveal">About Me</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p class="reveal">I'm a final year B.Sc Computer Science student passionate about web development and artificial intelligence. I specialize in creating responsive, user-friendly websites and exploring AI applications.</p>
+        <p class="reveal delay-1">My technical skills include HTML, CSS, JavaScript, Java, and SQL, along with strong problem-solving abilities and adaptability to new technologies.</p>
+        <p class="reveal delay-2">When I'm not coding, I enjoy learning about new technologies, contributing to open-source projects, and solving complex problems.</p>
+      </div>
+      <div class="about-image reveal delay-2">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="Web Development">
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2 class="section-title reveal">Education</h2>
+    <div class="education-item reveal">
+      <h3>Bachelor of Science in Computer Science</h3>
+      <span class="date">2021 - Present (Final Year)</span>
+      <p>Currently completing my final year with focus on web technologies and artificial intelligence.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title reveal">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <i class="fab fa-html5"></i>
+        <h3>HTML5</h3>
+      </div>
+      <div class="skill-card reveal delay-1">
+        <i class="fab fa-css3-alt"></i>
+        <h3>CSS3</h3>
+      </div>
+      <div class="skill-card reveal delay-2">
+        <i class="fab fa-js"></i>
+        <h3>JavaScript</h3>
+      </div>
+      <div class="skill-card reveal delay-3">
+        <i class="fas fa-database"></i>
+        <h3>SQL</h3>
+      </div>
+      <div class="skill-card reveal delay-1">
+        <i class="fab fa-java"></i>
+        <h3>Java</h3>
+      </div>
+      <div class="skill-card reveal delay-2">
+        <i class="fas fa-file-excel"></i>
+        <h3>Excel</h3>
+      </div>
+      <div class="skill-card reveal delay-3">
+        <i class="fas fa-laptop-code"></i>
+        <h3>Web Development</h3>
+      </div>
+    </div>
+    
+    <h3 class="section-title reveal" style="margin-top: 4rem; font-size: 1.8rem;">Soft Skills</h3>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <i class="fas fa-people-arrows"></i>
+        <h3>Adaptability</h3>
+      </div>
+      <div class="skill-card reveal delay-1">
+        <i class="fas fa-users"></i>
+        <h3>Teamwork</h3>
+      </div>
+      <div class="skill-card reveal delay-2">
+        <i class="fas fa-comments"></i>
+        <h3>Communication</h3>
+      </div>
+      <div class="skill-card reveal delay-3">
+        <i class="fas fa-chess-queen"></i>
+        <h3>Leadership</h3>
+      </div>
+      <div class="skill-card reveal delay-4">
+        <i class="fas fa-lightbulb"></i>
+        <h3>Problem-solving</h3>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="section-title reveal">Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" alt="EduGenie AI Tutor">
+        </div>
+        <div class="project-info">
+          <h3>EduGenie AI Tutor</h3>
+          <p>AI-powered website to answer Computer Science questions, explain code, and generate notes for students.</p>
+          <div class="project-tags">
+            <span class="tag">Flask</span>
+            <span class="tag">Python</span>
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Hugging Face</span>
+          </div>
+          <a href="#" class="btn btn-outline">View Project</a>
+        </div>
+      </div>
+      
+      <div class="project-card reveal delay-1">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="Portfolio Website">
+        </div>
+        <div class="project-info">
+          <h3>Portfolio Website</h3>
+          <p>Modern responsive portfolio website showcasing skills and projects with clean animations.</p>
+          <div class="project-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+          <a href="Portifoilo demo.html" class="btn btn-outline">View Project</a>
+        </div>
+      </div>
+      
+      <div class="project-card reveal delay-2">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80" alt="Calculator">
+        </div>
+        <div class="project-info">
+          <h3>Web Calculator</h3>
+          <p>Interactive calculator built during internship with advanced functionality.</p>
+          <div class="project-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+          <a href="calculator.html" class="btn btn-outline">View Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2 class="section-title reveal">Experience</h2>
+    <div class="experience-item reveal">
+      <h3>Web Development Intern</h3>
+      <span class="company">CodSoft</span>
+      <span class="date">1 Month Internship</span>
+      <ul>
+        <li>Developed responsive portfolio websites and landing pages</li>
+        <li>Created interactive calculator application</li>
+        <li>Gained hands-on experience with modern web technologies</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="resume" class="resume-section">
+    <h2 class="section-title reveal">My Resume</h2>
+    <div class="reveal delay-1">
+      <p style="margin-bottom: 2rem; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto;">
+        Download my complete resume to view my full professional background, skills, and achievements.
+      </p>
+      <a href="V.Ramya resume.pdf" class="resume-btn" download="Ramya_V_Resume.pdf">
+        <i class="fas fa-file-pdf"></i> Download Resume (PDF)
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="social-links">
+        <a href="https://github.com/ramya28112005"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ramya-v-b317232ba?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+     
+      </div>
+      <p class="copyright">© 2023 Ramya V. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Enhanced scroll reveal animation
+    const reveals = document.querySelectorAll('.reveal');
+    
+    function revealOnScroll() {
+      const windowHeight = window.innerHeight;
+      const revealPoint = 100;
+      
+      reveals.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        
+        if (elementTop < windowHeight - revealPoint) {
+          element.classList.add('active');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+    
+    // Smooth scrolling for navigation links with offset
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        const headerOffset = 80;
+        
+        window.scrollTo({
+          top: targetElement.offsetTop - headerOffset,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
